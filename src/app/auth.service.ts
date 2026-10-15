@@ -1,12 +1,13 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword, signOut
-} from
-  'firebase/auth';
+  createUserWithEmailAndPassword
+} from 'firebase/auth';
 import { auth } from './firebase.service';
 
-@Service()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   // login method
   login(email: string, password: string) {

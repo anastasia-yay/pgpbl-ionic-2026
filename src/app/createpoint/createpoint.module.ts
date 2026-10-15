@@ -1,8 +1,7 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular/lazy';
 
 import { CreatepointPageRoutingModule } from './createpoint-routing.module';
 import { CreatepointPage } from './createpoint.page';
@@ -12,8 +11,8 @@ import { CreatepointPage } from './createpoint.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CreatepointPageRoutingModule
+    CreatepointPageRoutingModule,
   ],
-  declarations: [CreatepointPage]
+  declarations: [CreatepointPage],
 })
 export class CreatepointPageModule {}
