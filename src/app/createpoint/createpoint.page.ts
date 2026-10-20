@@ -155,7 +155,7 @@ export class CreatepointPage implements OnInit, OnDestroy {
       await this.dataService.savePoint(pointData);
 
       // Kembali ke halaman sebelumnya
-      this.navCtrl.back();
+      this.navCtrl.navigateBack('/tabs/maps');
 
     } catch (error: any) {
       const alert = await this.alertCtrl.create({

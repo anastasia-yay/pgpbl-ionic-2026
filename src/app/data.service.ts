@@ -4,7 +4,10 @@ import { database } from './firebase.service';
 import {
   ref,
   push,
-  onValue
+  onValue,
+  remove,
+  update,
+  get
 } from 'firebase/database';
 
 @Injectable({
@@ -22,7 +25,7 @@ export class DataService {
     return push(pointsRef, point);
   }
 
-  // Mengambil data point dari Firebase
+  // Mengambil seluruh point dari Firebase
   getPoints(): Promise<any> {
     const pointsRef = ref(database, 'points');
 
@@ -30,7 +33,8 @@ export class DataService {
       onValue(
         pointsRef,
         (snapshot) => {
-          resolve(snapshot.val());
+          const data = snapshot.val();
+          resolve(data);
         },
         (error) => {
           reject(error);
@@ -38,5 +42,27 @@ export class DataService {
         { onlyOnce: true }
       );
     });
+  }
+
+  // Menghapus point berdasarkan key
+  deletePoint(key: string) {
+    const pointRef = ref(database, `points/${key}`);
+    return remove(pointRef);
+  }
+
+  // Mengambil satu point berdasarkan key
+  async getPoint(key: string): Promise<any> {
+    const pointRef = ref(database, `points/${key}`);
+    const snapshot = await get(pointRef);
+    return snapshot.val();
+  }
+
+  // Memperbarui nama dan koordinat point
+  updatePoint(key: string, point: {
+    name: string;
+    coordinates: string;
+  }) {
+    const pointRef = ref(database, `points/${key}`);
+    return update(pointRef, point);
   }
 }
